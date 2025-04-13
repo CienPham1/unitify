@@ -6,7 +6,7 @@ import UnitConverter from '@/components/UnitConverter';
 import { temperatureUnits } from '@/constants/units';
 import { convertTemperature } from '@/utils/converters';
 import { useUserStore } from '@/store/user-store';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 
 export default function TemperatureConverterScreen() {
   const addRecentConversion = useUserStore((state) => state.addRecentConversion);

@@ -6,7 +6,7 @@ import UnitConverter from '@/components/UnitConverter';
 import { forceUnits } from '@/constants/units';
 import { convertForce } from '@/utils/converters';
 import { useUserStore } from '@/store/user-store';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 
 export default function ForceConverterScreen() {
   const addRecentConversion = useUserStore((state) => state.addRecentConversion);

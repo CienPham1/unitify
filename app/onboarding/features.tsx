@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, FlatList, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import Button from '@/components/Button';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 import Typography from '@/constants/typography';
 import { useUserStore } from '@/store/user-store';
 import { Calculator, Gauge, Repeat, Star } from 'lucide-react-native';

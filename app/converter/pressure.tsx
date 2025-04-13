@@ -6,7 +6,7 @@ import UnitConverter from '@/components/UnitConverter';
 import { pressureUnits } from '@/constants/units';
 import { convertPressure } from '@/utils/converters';
 import { useUserStore } from '@/store/user-store';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 
 export default function PressureConverterScreen() {
   const addRecentConversion = useUserStore((state) => state.addRecentConversion);

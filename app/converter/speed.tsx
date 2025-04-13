@@ -6,7 +6,7 @@ import UnitConverter from '@/components/UnitConverter';
 import { speedUnits } from '@/constants/units';
 import { convertSpeed } from '@/utils/converters';
 import { useUserStore } from '@/store/user-store';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 
 export default function SpeedConverterScreen() {
   const addRecentConversion = useUserStore((state) => state.addRecentConversion);

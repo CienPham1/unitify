@@ -6,7 +6,7 @@ import UnitConverter from '@/components/UnitConverter';
 import { quantityUnits } from '@/constants/units';
 import { convertQuantity } from '@/utils/converters';
 import { useUserStore } from '@/store/user-store';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 
 export default function QuantityConverterScreen() {
   const addRecentConversion = useUserStore((state) => state.addRecentConversion);

@@ -6,7 +6,7 @@ import UnitConverter from '@/components/UnitConverter';
 import { angleUnits } from '@/constants/units';
 import { convertAngle } from '@/utils/converters';
 import { useUserStore } from '@/store/user-store';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 
 export default function AngleConverterScreen() {
   const addRecentConversion = useUserStore((state) => state.addRecentConversion);

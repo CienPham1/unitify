@@ -6,7 +6,7 @@ import UnitConverter from '@/components/UnitConverter';
 import { lengthUnits } from '@/constants/units';
 import { convertLength } from '@/utils/converters';
 import { useUserStore } from '@/store/user-store';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 
 export default function LengthConverterScreen() {
   const addRecentConversion = useUserStore((state) => state.addRecentConversion);

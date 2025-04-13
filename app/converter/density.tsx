@@ -6,7 +6,7 @@ import UnitConverter from '@/components/UnitConverter';
 import { densityUnits } from '@/constants/units';
 import { convertDensity } from '@/utils/converters';
 import { useUserStore } from '@/store/user-store';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 
 export default function DensityConverterScreen() {
   const addRecentConversion = useUserStore((state) => state.addRecentConversion);
