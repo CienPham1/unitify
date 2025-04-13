@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 import Typography from '@/constants/typography';
 import { useUserStore } from '@/store/user-store';
 import { Mail, Lock, User } from 'lucide-react-native';

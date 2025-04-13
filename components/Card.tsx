@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 import Typography from '@/constants/typography';
 
 interface CardProps {

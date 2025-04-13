@@ -6,7 +6,7 @@ import UnitConverter from '@/components/UnitConverter';
 import { massUnits } from '@/constants/units';
 import { convertMass } from '@/utils/converters';
 import { useUserStore } from '@/store/user-store';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 
 export default function MassConverterScreen() {
   const addRecentConversion = useUserStore((state) => state.addRecentConversion);

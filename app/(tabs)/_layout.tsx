@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 import { Home, Repeat, User, History } from 'lucide-react-native';
 
 export default function TabLayout() {

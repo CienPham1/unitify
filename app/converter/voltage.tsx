@@ -6,7 +6,7 @@ import UnitConverter from '@/components/UnitConverter';
 import { voltageUnits } from '@/constants/units';
 import { convertVoltage } from '@/utils/converters';
 import { useUserStore } from '@/store/user-store';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 
 export default function VoltageConverterScreen() {
   const addRecentConversion = useUserStore((state) => state.addRecentConversion);

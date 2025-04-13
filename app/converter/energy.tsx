@@ -6,7 +6,7 @@ import UnitConverter from '@/components/UnitConverter';
 import { energyUnits } from '@/constants/units';
 import { convertEnergy } from '@/utils/converters';
 import { useUserStore } from '@/store/user-store';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 
 export default function EnergyConverterScreen() {
   const addRecentConversion = useUserStore((state) => state.addRecentConversion);

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 import Typography from '@/constants/typography';
 import { useUserStore } from '@/store/user-store';
 import { 

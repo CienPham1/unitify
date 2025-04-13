@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   Platform
 } from 'react-native';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 import { Eye, EyeOff } from 'lucide-react-native';
 
 interface InputProps {

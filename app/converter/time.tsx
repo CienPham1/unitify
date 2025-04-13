@@ -6,7 +6,7 @@ import UnitConverter from '@/components/UnitConverter';
 import { timeUnits } from '@/constants/units';
 import { convertTime } from '@/utils/converters';
 import { useUserStore } from '@/store/user-store';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 
 export default function TimeConverterScreen() {
   const addRecentConversion = useUserStore((state) => state.addRecentConversion);

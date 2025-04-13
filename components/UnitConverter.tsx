@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import Input from './Input';
 import { ChevronDown } from 'lucide-react-native';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 import UnitPicker from './UnitPicker';
 
 interface UnitConverterProps {

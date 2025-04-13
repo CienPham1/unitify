@@ -8,7 +8,7 @@ import {
   FlatList,
   SafeAreaView
 } from 'react-native';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 import { Check, X } from 'lucide-react-native';
 
 interface UnitPickerProps {

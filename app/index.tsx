@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { Redirect } from 'expo-router';
 import { useUserStore } from '@/store/user-store';
-import Colors from '@/constants/colors';
+import Colors from '@/constants/Colors';
 
 export default function Index() {
   const { hasCompletedOnboarding } = useUserStore();
