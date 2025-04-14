@@ -36,7 +36,8 @@ export default function TimeConverterScreen() {
       />
       <UnitConverter 
         units={timeUnits} 
-        convert={handleConversion} 
+        convert={handleConversion}
+        category="Time"
       />
     </SafeAreaView>
   );

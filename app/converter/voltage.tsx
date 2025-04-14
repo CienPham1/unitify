@@ -36,7 +36,8 @@ export default function VoltageConverterScreen() {
       />
       <UnitConverter 
         units={voltageUnits} 
-        convert={handleConversion} 
+        convert={handleConversion}
+        category="Voltage"
       />
     </SafeAreaView>
   );

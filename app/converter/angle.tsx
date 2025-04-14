@@ -36,7 +36,8 @@ export default function AngleConverterScreen() {
       />
       <UnitConverter 
         units={angleUnits} 
-        convert={handleConversion} 
+        convert={handleConversion}
+        category="Angle"
       />
     </SafeAreaView>
   );

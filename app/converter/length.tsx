@@ -36,7 +36,8 @@ export default function LengthConverterScreen() {
       />
       <UnitConverter 
         units={lengthUnits} 
-        convert={handleConversion} 
+        convert={handleConversion}
+        category="Length"
       />
     </SafeAreaView>
   );

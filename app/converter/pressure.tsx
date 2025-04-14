@@ -36,7 +36,8 @@ export default function PressureConverterScreen() {
       />
       <UnitConverter 
         units={pressureUnits} 
-        convert={handleConversion} 
+        convert={handleConversion}
+        category="Pressure"
       />
     </SafeAreaView>
   );

@@ -36,7 +36,8 @@ export default function VolumeConverterScreen() {
       />
       <UnitConverter 
         units={volumeUnits} 
-        convert={handleConversion} 
+        convert={handleConversion}
+        category="Volume"
       />
     </SafeAreaView>
   );

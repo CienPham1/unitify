@@ -36,7 +36,8 @@ export default function DensityConverterScreen() {
       />
       <UnitConverter 
         units={densityUnits} 
-        convert={handleConversion} 
+        convert={handleConversion}
+        category="Density"
       />
     </SafeAreaView>
   );

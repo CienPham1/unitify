@@ -36,7 +36,8 @@ export default function CurrencyConverterScreen() {
       />
       <UnitConverter 
         units={currencyUnits} 
-        convert={handleConversion} 
+        convert={handleConversion}
+        category="Currency"
       />
     </SafeAreaView>
   );

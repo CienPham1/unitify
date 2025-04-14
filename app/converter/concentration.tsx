@@ -36,7 +36,8 @@ export default function ConcentrationConverterScreen() {
       />
       <UnitConverter 
         units={concentrationUnits} 
-        convert={handleConversion} 
+        convert={handleConversion}
+        category="Concentration"
       />
     </SafeAreaView>
   );

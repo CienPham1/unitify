@@ -36,7 +36,8 @@ export default function EnergyConverterScreen() {
       />
       <UnitConverter 
         units={energyUnits} 
-        convert={handleConversion} 
+        convert={handleConversion}
+        category="Energy"
       />
     </SafeAreaView>
   );

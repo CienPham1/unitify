@@ -36,7 +36,8 @@ export default function SoundConverterScreen() {
       />
       <UnitConverter 
         units={soundUnits} 
-        convert={handleConversion} 
+        convert={handleConversion}
+        category="Sound"
       />
     </SafeAreaView>
   );

@@ -36,7 +36,8 @@ export default function SpeedConverterScreen() {
       />
       <UnitConverter 
         units={speedUnits} 
-        convert={handleConversion} 
+        convert={handleConversion}
+        category="Speed"
       />
     </SafeAreaView>
   );

@@ -36,7 +36,8 @@ export default function MassConverterScreen() {
       />
       <UnitConverter 
         units={massUnits} 
-        convert={handleConversion} 
+        convert={handleConversion}
+        category="Mass"
       />
     </SafeAreaView>
   );

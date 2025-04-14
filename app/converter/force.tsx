@@ -36,7 +36,8 @@ export default function ForceConverterScreen() {
       />
       <UnitConverter 
         units={forceUnits} 
-        convert={handleConversion} 
+        convert={handleConversion}
+        category="Force"
       />
     </SafeAreaView>
   );

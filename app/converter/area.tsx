@@ -36,7 +36,8 @@ export default function AreaConverterScreen() {
       />
       <UnitConverter 
         units={areaUnits} 
-        convert={handleConversion} 
+        convert={handleConversion}
+        category="Area"
       />
     </SafeAreaView>
   );

@@ -36,7 +36,8 @@ export default function TemperatureConverterScreen() {
       />
       <UnitConverter 
         units={temperatureUnits} 
-        convert={handleConversion} 
+        convert={handleConversion}
+        category="Temperature"
       />
     </SafeAreaView>
   );

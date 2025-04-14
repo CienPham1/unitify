@@ -36,7 +36,8 @@ export default function QuantityConverterScreen() {
       />
       <UnitConverter 
         units={quantityUnits} 
-        convert={handleConversion} 
+        convert={handleConversion}
+        category="Quantity"
       />
     </SafeAreaView>
   );
