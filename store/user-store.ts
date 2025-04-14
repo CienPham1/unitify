@@ -2,10 +2,12 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-interface FavoriteUnit {
+interface FavoriteConversion {
+  id: string;
   category: string;
   fromUnit: string;
   toUnit: string;
+  label: string;
 }
 
 interface UserState {
@@ -21,8 +23,8 @@ interface UserState {
     timestamp: number;
   }[];
   favoriteCategories: string[];
+  favoriteConversions: FavoriteConversion[];
   hasCompletedOnboarding: boolean;
-  favorites: FavoriteUnit[];
   
   // Actions
   login: (username: string, email: string) => void;
@@ -35,21 +37,22 @@ interface UserState {
     result: number;
   }) => void;
   toggleFavoriteCategory: (category: string) => void;
+  addFavoriteConversion: (conversion: FavoriteConversion) => void;
+  removeFavoriteConversion: (id: string) => void;
+  isFavoriteConversion: (category: string, fromUnit: string, toUnit: string) => boolean;
   setOnboardingComplete: () => void;
-  addFavorite: (favorite: FavoriteUnit) => void;
-  removeFavorite: (favorite: FavoriteUnit) => void;
 }
 
 export const useUserStore = create<UserState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       isLoggedIn: false,
       username: null,
       email: null,
       recentConversions: [],
       favoriteCategories: [],
+      favoriteConversions: [],
       hasCompletedOnboarding: false,
-      favorites: [],
       
       login: (username, email) => set({ 
         isLoggedIn: true, 
@@ -91,22 +94,37 @@ export const useUserStore = create<UserState>()(
         }
       }),
       
+      addFavoriteConversion: (conversion) => set((state) => {
+        // Check if this conversion is already a favorite
+        const exists = state.favoriteConversions.some(
+          (fav) => fav.category === conversion.category && 
+                  fav.fromUnit === conversion.fromUnit && 
+                  fav.toUnit === conversion.toUnit
+        );
+        
+        if (exists) return state;
+        
+        return {
+          favoriteConversions: [...state.favoriteConversions, conversion]
+        };
+      }),
+      
+      removeFavoriteConversion: (id) => set((state) => ({
+        favoriteConversions: state.favoriteConversions.filter(
+          (conversion) => conversion.id !== id
+        )
+      })),
+      
+      isFavoriteConversion: (category, fromUnit, toUnit) => {
+        const state = get();
+        return state.favoriteConversions.some(
+          (fav) => fav.category === category && 
+                  fav.fromUnit === fromUnit && 
+                  fav.toUnit === toUnit
+        );
+      },
+      
       setOnboardingComplete: () => set({ hasCompletedOnboarding: true }),
-      
-      addFavorite: (favorite) =>
-        set((state) => ({
-          favorites: [...state.favorites, favorite],
-        })),
-      
-      removeFavorite: (favorite) =>
-        set((state) => ({
-          favorites: state.favorites.filter(
-            (f) =>
-              f.category !== favorite.category ||
-              f.fromUnit !== favorite.fromUnit ||
-              f.toUnit !== favorite.toUnit
-          ),
-        })),
     }),
     {
       name: 'unitify-user-storage',

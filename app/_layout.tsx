@@ -2,22 +2,31 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ErrorBoundary } from './error-boundary';
+import { useThemeStore } from '@/store/theme-store';
+import { useColorScheme } from 'react-native';
+import useThemeColors from '@/hooks/useThemeColors';
 
 export default function RootLayout() {
+  const systemTheme = useColorScheme();
+  const { theme, isSystemTheme } = useThemeStore();
+  const activeTheme = isSystemTheme ? systemTheme : theme;
+  const colors = useThemeColors();
+
   return (
     <ErrorBoundary>
       <SafeAreaProvider>
-        <StatusBar style="dark" />
+        <StatusBar style={activeTheme === 'dark' ? 'light' : 'dark'} />
         <Stack screenOptions={{
           headerStyle: {
-            backgroundColor: '#FFFFFF',
+            backgroundColor: colors.background,
           },
           headerShadowVisible: false,
           headerTitleStyle: {
             fontWeight: '600',
+            color: colors.text,
           },
           contentStyle: {
-            backgroundColor: '#FFFFFF',
+            backgroundColor: colors.background,
           },
         }}>
           <Stack.Screen name="index" options={{ headerShown: false }} />

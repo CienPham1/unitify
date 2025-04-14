@@ -8,8 +8,8 @@ import {
   FlatList,
   SafeAreaView
 } from 'react-native';
-import Colors from '@/constants/Colors';
 import { Check, X } from 'lucide-react-native';
+import useThemeColors from '@/hooks/useThemeColors';
 
 interface UnitPickerProps {
   units: { label: string; value: string; symbol?: string }[];
@@ -24,6 +24,8 @@ export default function UnitPicker({
   onSelect, 
   onClose 
 }: UnitPickerProps) {
+  const colors = useThemeColors();
+
   return (
     <Modal
       animationType="slide"
@@ -32,11 +34,11 @@ export default function UnitPicker({
       onRequestClose={onClose}
     >
       <SafeAreaView style={styles.modalContainer}>
-        <View style={styles.modalContent}>
-          <View style={styles.header}>
-            <Text style={styles.headerTitle}>Select Unit</Text>
+        <View style={[styles.modalContent, { backgroundColor: colors.background }]}>
+          <View style={[styles.header, { borderBottomColor: colors.border }]}>
+            <Text style={[styles.headerTitle, { color: colors.text }]}>Select Unit</Text>
             <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-              <X size={24} color={Colors.text} />
+              <X size={24} color={colors.text} />
             </TouchableOpacity>
           </View>
           
@@ -47,15 +49,16 @@ export default function UnitPicker({
               <TouchableOpacity
                 style={[
                   styles.unitItem,
-                  selectedUnit === item.value && styles.selectedItem
+                  { borderBottomColor: colors.border },
+                  selectedUnit === item.value && { backgroundColor: colors.lightGray }
                 ]}
                 onPress={() => onSelect(item.value)}
               >
-                <Text style={styles.unitLabel}>
+                <Text style={[styles.unitLabel, { color: colors.text }]}>
                   {item.label} {item.symbol ? `(${item.symbol})` : ''}
                 </Text>
                 {selectedUnit === item.value && (
-                  <Check size={20} color={Colors.primary} />
+                  <Check size={20} color={colors.primary} />
                 )}
               </TouchableOpacity>
             )}
@@ -74,7 +77,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
-    backgroundColor: Colors.background,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     maxHeight: '80%',
@@ -85,12 +87,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
   },
   headerTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: Colors.text,
   },
   closeButton: {
     padding: 4,
@@ -104,13 +104,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
-  },
-  selectedItem: {
-    backgroundColor: Colors.lightGray,
   },
   unitLabel: {
     fontSize: 16,
-    color: Colors.text,
   },
 });

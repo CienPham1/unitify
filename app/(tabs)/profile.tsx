@@ -2,17 +2,19 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
-import Colors from '@/constants/Colors';
 import Typography from '@/constants/typography';
 import { useUserStore } from '@/store/user-store';
 import { 
   User, Mail, LogOut, Heart, Settings, Info, 
-  HelpCircle, Star, Moon, Sun
+  HelpCircle, Star
 } from 'lucide-react-native';
+import ThemeToggle from '@/components/ThemeToggle';
+import useThemeColors from '@/hooks/useThemeColors';
 
 export default function ProfileScreen() {
   const router = useRouter();
   const { username, email, logout } = useUserStore();
+  const colors = useThemeColors();
 
   const handleLogout = () => {
     Alert.alert(
@@ -36,81 +38,72 @@ export default function ProfileScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={['left', 'right']}>
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['left', 'right']}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
-          <Text style={styles.title}>Profile</Text>
-          <Text style={styles.subtitle}>Manage your account</Text>
+          <Text style={[styles.title, { color: colors.text }]}>Profile</Text>
+          <Text style={[styles.subtitle, { color: colors.textSecondary }]}>Manage your account</Text>
         </View>
 
-        <View style={styles.profileCard}>
-          <View style={styles.avatarContainer}>
+        <View style={[styles.profileCard, { backgroundColor: colors.card }]}>
+          <View style={[styles.avatarContainer, { backgroundColor: colors.primary }]}>
             <Text style={styles.avatarText}>{username?.[0] || 'U'}</Text>
           </View>
           <View style={styles.profileInfo}>
-            <Text style={styles.nameText}>{username || 'User'}</Text>
-            <Text style={styles.emailText}>{email || 'user@example.com'}</Text>
+            <Text style={[styles.nameText, { color: colors.text }]}>{username || 'User'}</Text>
+            <Text style={[styles.emailText, { color: colors.textSecondary }]}>{email || 'user@example.com'}</Text>
           </View>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Account</Text>
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>Appearance</Text>
+          <ThemeToggle />
+        </View>
+
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>Account</Text>
           
           <TouchableOpacity style={styles.menuItem}>
-            <User size={20} color={Colors.primary} />
-            <Text style={styles.menuText}>Edit Profile</Text>
+            <User size={20} color={colors.primary} />
+            <Text style={[styles.menuText, { color: colors.text }]}>Edit Profile</Text>
           </TouchableOpacity>
           
           <TouchableOpacity style={styles.menuItem}>
-            <Heart size={20} color={Colors.primary} />
-            <Text style={styles.menuText}>Favorite Conversions</Text>
+            <Heart size={20} color={colors.primary} />
+            <Text style={[styles.menuText, { color: colors.text }]}>Favorite Conversions</Text>
           </TouchableOpacity>
           
           <TouchableOpacity style={styles.menuItem}>
-            <Settings size={20} color={Colors.primary} />
-            <Text style={styles.menuText}>Settings</Text>
+            <Settings size={20} color={colors.primary} />
+            <Text style={[styles.menuText, { color: colors.text }]}>Settings</Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Appearance</Text>
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>About</Text>
           
           <TouchableOpacity style={styles.menuItem}>
-            <Sun size={20} color={Colors.primary} />
-            <Text style={styles.menuText}>Light Mode</Text>
+            <Info size={20} color={colors.primary} />
+            <Text style={[styles.menuText, { color: colors.text }]}>About Unitify</Text>
           </TouchableOpacity>
           
           <TouchableOpacity style={styles.menuItem}>
-            <Moon size={20} color={Colors.primary} />
-            <Text style={styles.menuText}>Dark Mode</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>About</Text>
-          
-          <TouchableOpacity style={styles.menuItem}>
-            <Info size={20} color={Colors.primary} />
-            <Text style={styles.menuText}>About Unitify</Text>
+            <HelpCircle size={20} color={colors.primary} />
+            <Text style={[styles.menuText, { color: colors.text }]}>Help & Support</Text>
           </TouchableOpacity>
           
           <TouchableOpacity style={styles.menuItem}>
-            <HelpCircle size={20} color={Colors.primary} />
-            <Text style={styles.menuText}>Help & Support</Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity style={styles.menuItem}>
-            <Star size={20} color={Colors.primary} />
-            <Text style={styles.menuText}>Rate the App</Text>
+            <Star size={20} color={colors.primary} />
+            <Text style={[styles.menuText, { color: colors.text }]}>Rate the App</Text>
           </TouchableOpacity>
         </View>
 
         <TouchableOpacity 
-          style={styles.logoutButton}
+          style={[styles.logoutButton, { backgroundColor: colors.lightGray }]}
           onPress={handleLogout}
         >
-          <LogOut size={20} color={Colors.error} />
-          <Text style={styles.logoutText}>Logout</Text>
+          <LogOut size={20} color={colors.error} />
+          <Text style={[styles.logoutText, { color: colors.error }]}>Logout</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
@@ -120,7 +113,6 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.background,
   },
   scrollContent: {
     paddingBottom: 24,
@@ -135,17 +127,16 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     ...Typography.body,
-    color: Colors.textSecondary,
+    marginBottom: 0,
   },
   profileCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: Colors.card,
     borderRadius: 12,
     padding: 16,
     marginHorizontal: 24,
     marginBottom: 24,
-    shadowColor: Colors.text,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
@@ -155,7 +146,6 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: Colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 16,
@@ -163,7 +153,7 @@ const styles = StyleSheet.create({
   avatarText: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: Colors.background,
+    color: '#FFFFFF',
   },
   profileInfo: {
     flex: 1,
@@ -174,7 +164,6 @@ const styles = StyleSheet.create({
   },
   emailText: {
     ...Typography.bodySmall,
-    color: Colors.textSecondary,
   },
   section: {
     marginBottom: 24,
@@ -200,12 +189,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: 24,
     paddingVertical: 16,
-    backgroundColor: Colors.lightGray,
     borderRadius: 8,
   },
   logoutText: {
     ...Typography.body,
-    color: Colors.error,
     fontWeight: '600',
     marginLeft: 8,
   },

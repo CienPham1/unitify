@@ -7,7 +7,7 @@ import {
   ViewStyle,
   TextStyle
 } from 'react-native';
-import Colors from '@/constants/Colors';
+import useThemeColors from '@/hooks/useThemeColors';
 
 interface ButtonProps {
   title: string;
@@ -32,46 +32,70 @@ export default function Button({
   textStyle,
   fullWidth = false,
 }: ButtonProps) {
+  const colors = useThemeColors();
+  
   const getButtonStyle = () => {
     let buttonStyle: ViewStyle = {};
     
     // Variant styles
     switch (variant) {
       case 'primary':
-        buttonStyle = styles.primaryButton;
+        buttonStyle = { 
+          backgroundColor: colors.primary,
+          borderRadius: 8,
+          justifyContent: 'center',
+          alignItems: 'center',
+        };
         break;
       case 'secondary':
-        buttonStyle = styles.secondaryButton;
+        buttonStyle = { 
+          backgroundColor: colors.secondary,
+          borderRadius: 8,
+          justifyContent: 'center',
+          alignItems: 'center',
+        };
         break;
       case 'outline':
-        buttonStyle = styles.outlineButton;
+        buttonStyle = { 
+          backgroundColor: 'transparent',
+          borderRadius: 8,
+          borderWidth: 1,
+          borderColor: colors.primary,
+          justifyContent: 'center',
+          alignItems: 'center',
+        };
         break;
       case 'text':
-        buttonStyle = styles.textButton;
+        buttonStyle = { 
+          backgroundColor: 'transparent',
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingHorizontal: 8,
+        };
         break;
     }
     
     // Size styles
     switch (size) {
       case 'small':
-        buttonStyle = { ...buttonStyle, ...styles.smallButton };
+        buttonStyle = { ...buttonStyle, paddingVertical: 6, paddingHorizontal: 12 };
         break;
       case 'medium':
-        buttonStyle = { ...buttonStyle, ...styles.mediumButton };
+        buttonStyle = { ...buttonStyle, paddingVertical: 10, paddingHorizontal: 16 };
         break;
       case 'large':
-        buttonStyle = { ...buttonStyle, ...styles.largeButton };
+        buttonStyle = { ...buttonStyle, paddingVertical: 14, paddingHorizontal: 24 };
         break;
     }
     
     // Full width
     if (fullWidth) {
-      buttonStyle = { ...buttonStyle, ...styles.fullWidth };
+      buttonStyle = { ...buttonStyle, width: '100%' };
     }
     
     // Disabled state
     if (disabled) {
-      buttonStyle = { ...buttonStyle, ...styles.disabledButton };
+      buttonStyle = { ...buttonStyle, opacity: 0.6 };
     }
     
     return buttonStyle;
@@ -82,33 +106,49 @@ export default function Button({
     
     switch (variant) {
       case 'primary':
-        textStyleVar = styles.primaryText;
+        textStyleVar = { 
+          color: colors.background,
+          fontWeight: '600',
+          textAlign: 'center',
+        };
         break;
       case 'secondary':
-        textStyleVar = styles.primaryText;
+        textStyleVar = { 
+          color: colors.background,
+          fontWeight: '600',
+          textAlign: 'center',
+        };
         break;
       case 'outline':
-        textStyleVar = styles.outlineText;
+        textStyleVar = { 
+          color: colors.primary,
+          fontWeight: '600',
+          textAlign: 'center',
+        };
         break;
       case 'text':
-        textStyleVar = styles.textButtonText;
+        textStyleVar = { 
+          color: colors.primary,
+          fontWeight: '600',
+          textAlign: 'center',
+        };
         break;
     }
     
     switch (size) {
       case 'small':
-        textStyleVar = { ...textStyleVar, ...styles.smallText };
+        textStyleVar = { ...textStyleVar, fontSize: 14 };
         break;
       case 'medium':
-        textStyleVar = { ...textStyleVar, ...styles.mediumText };
+        textStyleVar = { ...textStyleVar, fontSize: 16 };
         break;
       case 'large':
-        textStyleVar = { ...textStyleVar, ...styles.largeText };
+        textStyleVar = { ...textStyleVar, fontSize: 18 };
         break;
     }
     
     if (disabled) {
-      textStyleVar = { ...textStyleVar, ...styles.disabledText };
+      textStyleVar = { ...textStyleVar, opacity: 0.8 };
     }
     
     return textStyleVar;
@@ -123,7 +163,7 @@ export default function Button({
     >
       {loading ? (
         <ActivityIndicator 
-          color={variant === 'outline' || variant === 'text' ? Colors.primary : Colors.background} 
+          color={variant === 'outline' || variant === 'text' ? colors.primary : colors.background} 
           size="small" 
         />
       ) : (
@@ -132,77 +172,3 @@ export default function Button({
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  primaryButton: {
-    backgroundColor: Colors.primary,
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  secondaryButton: {
-    backgroundColor: Colors.secondary,
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  outlineButton: {
-    backgroundColor: 'transparent',
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: Colors.primary,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textButton: {
-    backgroundColor: 'transparent',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 8,
-  },
-  smallButton: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-  },
-  mediumButton: {
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-  },
-  largeButton: {
-    paddingVertical: 14,
-    paddingHorizontal: 24,
-  },
-  fullWidth: {
-    width: '100%',
-  },
-  disabledButton: {
-    opacity: 0.6,
-  },
-  primaryText: {
-    color: Colors.background,
-    fontWeight: '600',
-    textAlign: 'center',
-  },
-  outlineText: {
-    color: Colors.primary,
-    fontWeight: '600',
-    textAlign: 'center',
-  },
-  textButtonText: {
-    color: Colors.primary,
-    fontWeight: '600',
-    textAlign: 'center',
-  },
-  smallText: {
-    fontSize: 14,
-  },
-  mediumText: {
-    fontSize: 16,
-  },
-  largeText: {
-    fontSize: 18,
-  },
-  disabledText: {
-    opacity: 0.8,
-  },
-});

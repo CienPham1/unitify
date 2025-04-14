@@ -2,14 +2,15 @@ import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
-import Colors from '@/constants/Colors';
 import Typography from '@/constants/typography';
 import { useUserStore } from '@/store/user-store';
 import { Clock } from 'lucide-react-native';
+import useThemeColors from '@/hooks/useThemeColors';
 
 export default function HistoryScreen() {
   const router = useRouter();
   const { recentConversions } = useUserStore();
+  const colors = useThemeColors();
 
   const formatDate = (timestamp: number) => {
     const date = new Date(timestamp);
@@ -21,17 +22,17 @@ export default function HistoryScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={['left', 'right']}>
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['left', 'right']}>
       <View style={styles.header}>
-        <Text style={styles.title}>Conversion History</Text>
-        <Text style={styles.subtitle}>Your recent unit conversions</Text>
+        <Text style={[styles.title, { color: colors.text }]}>Conversion History</Text>
+        <Text style={[styles.subtitle, { color: colors.textSecondary }]}>Your recent unit conversions</Text>
       </View>
 
       {recentConversions.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Clock size={64} color={Colors.lightGray} />
-          <Text style={styles.emptyText}>No conversion history yet</Text>
-          <Text style={styles.emptySubtext}>
+          <Clock size={64} color={colors.lightGray} />
+          <Text style={[styles.emptyText, { color: colors.textSecondary }]}>No conversion history yet</Text>
+          <Text style={[styles.emptySubtext, { color: colors.textSecondary }]}>
             Your recent conversions will appear here
           </Text>
         </View>
@@ -41,19 +42,22 @@ export default function HistoryScreen() {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <TouchableOpacity
-              style={styles.historyItem}
+              style={[styles.historyItem, { 
+                backgroundColor: colors.card,
+                shadowColor: colors.text,
+              }]}
               onPress={() => navigateToConverter(item.category)}
             >
               <View style={styles.historyHeader}>
-                <Text style={styles.categoryText}>{item.category}</Text>
-                <Text style={styles.dateText}>{formatDate(item.timestamp)}</Text>
+                <Text style={[styles.categoryText, { color: colors.primary }]}>{item.category}</Text>
+                <Text style={[styles.dateText, { color: colors.textSecondary }]}>{formatDate(item.timestamp)}</Text>
               </View>
               <View style={styles.conversionDetails}>
-                <Text style={styles.valueText}>
+                <Text style={[styles.valueText, { color: colors.text }]}>
                   {item.value} {item.fromUnit}
                 </Text>
-                <Text style={styles.arrowText}>→</Text>
-                <Text style={styles.resultText}>
+                <Text style={[styles.arrowText, { color: colors.primary }]}>→</Text>
+                <Text style={[styles.resultText, { color: colors.text }]}>
                   {item.result.toFixed(2)} {item.toUnit}
                 </Text>
               </View>
@@ -69,7 +73,6 @@ export default function HistoryScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.background,
   },
   header: {
     padding: 24,
@@ -81,18 +84,15 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     ...Typography.body,
-    color: Colors.textSecondary,
   },
   listContent: {
     padding: 16,
     paddingTop: 0,
   },
   historyItem: {
-    backgroundColor: Colors.card,
     borderRadius: 12,
     padding: 16,
     marginBottom: 16,
-    shadowColor: Colors.text,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
@@ -107,11 +107,9 @@ const styles = StyleSheet.create({
   categoryText: {
     ...Typography.bodySmall,
     fontWeight: '600',
-    color: Colors.primary,
   },
   dateText: {
     ...Typography.caption,
-    color: Colors.textSecondary,
   },
   conversionDetails: {
     flexDirection: 'row',
@@ -124,7 +122,6 @@ const styles = StyleSheet.create({
   arrowText: {
     ...Typography.body,
     marginHorizontal: 8,
-    color: Colors.primary,
     fontWeight: 'bold',
   },
   resultText: {
@@ -142,11 +139,9 @@ const styles = StyleSheet.create({
     ...Typography.h2,
     marginTop: 16,
     marginBottom: 8,
-    color: Colors.textSecondary,
   },
   emptySubtext: {
     ...Typography.body,
-    color: Colors.textSecondary,
     textAlign: 'center',
   },
 });

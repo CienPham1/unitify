@@ -1,16 +1,19 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
-import Colors from '@/constants/Colors';
-import { Home, Repeat, User, History } from 'lucide-react-native';
+import { Home, Repeat, User, History, Star } from 'lucide-react-native';
+import useThemeColors from '@/hooks/useThemeColors';
 
 export default function TabLayout() {
+  const colors = useThemeColors();
+
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors.primary,
-        tabBarInactiveTintColor: Colors.darkGray,
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.darkGray,
         tabBarStyle: {
-          borderTopColor: Colors.border,
+          borderTopColor: colors.border,
+          backgroundColor: colors.background,
           elevation: 0,
           shadowOpacity: 0,
         },
@@ -19,15 +22,16 @@ export default function TabLayout() {
           fontWeight: '500',
         },
         headerStyle: {
-          backgroundColor: Colors.background,
+          backgroundColor: colors.background,
           elevation: 0,
           shadowOpacity: 0,
           borderBottomWidth: 1,
-          borderBottomColor: Colors.border,
+          borderBottomColor: colors.border,
         },
         headerTitleStyle: {
           fontWeight: '600',
           fontSize: 18,
+          color: colors.text,
         },
       }}
     >
@@ -43,6 +47,13 @@ export default function TabLayout() {
         options={{
           title: 'Convert',
           tabBarIcon: ({ color, size }) => <Repeat size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="favorites"
+        options={{
+          title: 'Favorites',
+          tabBarIcon: ({ color, size }) => <Star size={size} color={color} />,
         }}
       />
       <Tabs.Screen
